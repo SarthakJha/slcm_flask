@@ -42,6 +42,7 @@ def hello():
     k = 0
     while(page < 5):
         time.sleep(5)
+       # page = page + 1
         table = browser.find_element_by_id('ContentPlaceHolder1_grvDocument')
         tra = table.find_elements_by_tag_name('tr')
         tra = tra[1:]
@@ -79,6 +80,9 @@ def hello():
     })
 
 
+# Downloads specific pdf
+
+
 @app.route('/getpdf', methods=['POST'])
 def getPDF():
     req_data = request.get_json()
@@ -113,7 +117,8 @@ def getPDF():
     page = 1
     contentTitleDict = []
     k = 0
-    while(page < requestedPage):
+
+    while(page < requestedPage + 1):
         time.sleep(5)
         table = browser.find_element_by_id('ContentPlaceHolder1_grvDocument')
         tra = table.find_elements_by_tag_name('tr')
@@ -123,21 +128,17 @@ def getPDF():
         tra = tra[:len(tra)-2]
         nextl = two_button[page].find_element_by_tag_name('a')
         print('next page hehe')
-        nextl.click()
-        page = page + 1
+        # page = page + 1
+        # nextl.click()
+        # page = page + 1
         if page == requestedPage:
+            print('requested page found')
             table = browser.find_element_by_id(
                 'ContentPlaceHolder1_grvDocument')
             tra = table.find_elements_by_tag_name('tr')
             tra = tra[1:]
             page_row = tra[len(tra)-1]
-           # two_button = page_row.find_elements_by_tag_name('td')
             tra = tra[:len(tra)-2]
-            # print({
-            #     "tra3": tra,
-            #     "length": len(tra),
-            #     "firstElement": tra[0]
-            # })
             for i in tra:
                 k = k+1
                 downloadbtn = i.find_element_by_tag_name('a')
@@ -152,17 +153,23 @@ def getPDF():
                     "index": index,
                     "page": page
                 }
-                # print(k)
+                contentTitleDict.append(titleDict)
                 standardX = k+((page-1)*10)
                 if requestedIndex == standardX:
                     print(requestedIndex == standardX)
                     downloadbtn.click()
-                # print(standardX)
-                contentTitleDict.append(titleDict)
-                # downloadbtn.click()
-                # time.sleep(10)
+                    print('exiting loop')
+                    break
+            break
+            # print(standardX)
+
+            # downloadbtn.click()
+            # time.sleep(10)
             # print(link)
         else:
+            # page = page + 1
+            page = page + 1
+            nextl.click()
             continue
         # nextl = two_button[page].find_element_by_tag_name('a')
         # nextl.click()

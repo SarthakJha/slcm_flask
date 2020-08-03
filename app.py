@@ -15,8 +15,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    username = '190905191'
-    password = 'Matarani@1'
+    username = 'xxx'
+    password = 'xxxx'
 
     chrome_options = Options()
     chrome_options.add_argument('headless')
@@ -90,8 +90,8 @@ def getPDF(file_name):
     requestedPage = req_data['page']
     requestedIndex = req_data['index']
 
-    # username = '190905191'
-    # password = 'Matarani@1'
+    # username = 'xxx'
+    # password = 'xxxx'
 
     # chrome_options = Options()
     # chrome_options.add_argument('headless')
@@ -175,10 +175,6 @@ def getPDF(file_name):
     except:
         print("aborting")
         abort(404)
-    # return jsonify({
-    #     "page": req_data['page'],
-    #     "index": req_data['index'],
-    # })
 
 
 if __name__ == '__main__':

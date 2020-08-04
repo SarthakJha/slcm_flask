@@ -15,8 +15,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    username = '190905191'
-    password = '2001@Billion'
+    username = 'xxxxxxx'
+    password = 'xxxxxx'
 
     chrome_options = Options()
     chrome_options.add_argument('headless')
